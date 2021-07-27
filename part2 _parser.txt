@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+
+
+
+import json # need to copy it to part 2
+import argparse
+import tensorflow as tf
+import tensorflow_hub as hub
+from PIL import Image
+import numpy as np
+# import libraries
+import warnings
+warnings.filterwarnings('ignore')
+
+parser = argparse.ArgumentParser(description='Image Classifier - Prediction Part')
+parser.add_argument('--input', default='./test_images/hard-leaved_pocket_orchid.jpg', action="store", type = str, help='image path')
+parser.add_argument('--model', default='./classifier.h5', action="store", type = str, help='checkpoint file path/name')
+parser.add_argument('--top_k', default=5, dest="top_k", action="store", type=int, help='return top K most likely classes')
+parser.add_argument('--category_names', dest="category_names", action="store", default='label_map.json', help='mapping the categories to real names')
+
+
+arg_parser = parser.parse_args()
+
+image_path = arg_parser.input
+model_path = arg_parser.model
+topk = arg_parser.top_k
+category_names = arg_parser.category_names
