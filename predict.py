@@ -31,7 +31,7 @@ parser.add_argument("--category_names",dest="category_names",action="store",defa
 
 arg_parser=parser.parse_args()
 image_path=arg_parser.input
-model_path=arg_parser.model
+model_path=tf.keras.models.load_model('./model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 topk=arg_parser.top_k
 category_names=arg_parser.category_names
 
@@ -64,8 +64,8 @@ if __name__=="__main__":
    with open(category_names,'r') as f:
         class_names=json.load(f)
         
-   model_2=tf.keras.models.load_model('./model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
-   probs, classes = predict(image_path, model_2, topk)
+  # model_2=
+   probs, classes = predict(image_path, model_path, topk)
    labels=[class_names[str(int(labell+1))]for labell in classes ]
 
    print('probs:: ', probs)
