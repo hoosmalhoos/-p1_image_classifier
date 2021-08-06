@@ -25,13 +25,13 @@ logger.setLevel(logging.ERROR)
 
 parser=argparse.ArgumentParser(description="Image Classifer -Prediction Part")
 parser.add_argument("--input",default="./test_images/hard-leaved_pocket_orchid.jpg",action="store",type=str,help="image path")
-parser.add_argument("--model",default="./classifer.h5",action="store",type=str,help="checkpoint file path/name")
+parser.add_argument("--model",default="./model.h5",action="store",type=str,help="checkpoint file path/name")
 parser.add_argument("--top_k",default=5,dest="top_k",action="store",type=int,help="return top k most")
 parser.add_argument("--category_names",dest="category_names",action="store",default="label_map.json",help="mappig the category")
 
 arg_parser=parser.parse_args()
 image_path=arg_parser.input
-model_path=tf.keras.models.load_model('./model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+model_path=tf.keras.models.load_model(arg_parser.model,custom_objects={'KerasLayer':hub.KerasLayer})
 topk=arg_parser.top_k
 category_names=arg_parser.category_names
 
